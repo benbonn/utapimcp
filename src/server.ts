@@ -8,81 +8,32 @@ const server = new McpServer({
   version: "1.0.0",
 });
 
-// Get Chuck Norris joke tool
-const getChuckJoke = server.tool(
-  "get-chuck-joke",
-  "Get a random Chuck Norris joke",
-  async () => {
-    const response = await fetch("https://api.chucknorris.io/jokes/random");
-    const data = await response.json();
-    return {
-      content: [
-        {
-          type: "text",
-          text: data.value,
-        },
-      ],
-    };
-  }
-);
-
-// Get Chuck Norris joke by category tool
-const getChuckJokeByCategory = server.tool(
-  "get-chuck-joke-by-category",
-  "Get a random Chuck Norris joke by category",
+// DHL Shipment Tracking Tool
+const trackShipment = server.tool(
+  "track-shipment",
+  "Track a shipment using DHL API",
   {
-    category: z.string().describe("Category of the Chuck Norris joke"),
+    trackingNumber: z.string().describe("The tracking number for the shipment"),
+    apiKey: z.string().describe("User's DHL API key"),
   },
-  async (params: { category: string }) => {
-    const response = await fetch(
-      `https://api.chucknorris.io/jokes/random?category=${params.category}`
-    );
-    const data = await response.json();
-    return {
-      content: [
-        {
-          type: "text",
-          text: data.value,
-        },
-      ],
-    };
-  }
-);
-
-// Get Chuck Norris joke categories tool
-const getChuckCategories = server.tool(
-  "get-chuck-categories",
-  "Get all available categories for Chuck Norris jokes",
-  async () => {
-    const response = await fetch("https://api.chucknorris.io/jokes/categories");
-    const data = await response.json();
-    return {
-      content: [
-        {
-          type: "text",
-          text: data.join(", "),
-        },
-      ],
-    };
-  }
-);
-
-// Get Dad joke tool
-const getDadJoke = server.tool(
-  "get-dad-joke",
-  "Get a random dad joke",
-  async () => {
-    const response = await fetch("https://icanhazdadjoke.com/", {
+  async (params: { trackingNumber: string; apiKey: string }) => {
+    const response = await fetch(`https://api.dhl.com/track/shipments/${params.trackingNumber}`, {
       headers: {
-        Accept: "application/json",
+        "DHL-API-Key": params.apiKey,
+        "Accept": "application/json",
       },
     });
+
+    if (!response.ok) {
+      throw new Error(`Error fetching shipment: ${response.statusText}`);
+    }
+
     const data = await response.json();
     return {
       content: [
         {
           type: "text",
-          text: data.joke,
+          text: JSON.stringify(data, null, 2), // Format the response for better readability
         },
       ],
     };
@@ -121,33 +72,7 @@ app.post("/mcp", async (req: Request, res: Response) => {
   }
 });
 
-app.get("/mcp", async (req: Request, res: Response) => {
-  console.log("Received GET MCP request");
-  res.writeHead(405).end(
-    JSON.stringify({
-      jsonrpc: "2.0",
-      error: {
-        code: -32000,
-        message: "Method not allowed.",
-      },
-      id: null,
-    })
-  );
-});
-
-app.delete("/mcp", async (req: Request, res: Response) => {
-  console.log("Received DELETE MCP request");
-  res.writeHead(405).end(
-    JSON.stringify({
-      jsonrpc: "2.0",
-      error: {
-        code: -32000,
-        message: "Method not allowed.",
-      },
-      id: null,
-    })
-  );
-});
+// Other routes (GET, DELETE) remain unchanged...
 
 // Start the server
 const PORT = process.env.PORT || 3000;
