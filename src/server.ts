@@ -17,7 +17,7 @@ const trackShipment = server.tool(
     apiKey: z.string().describe("User's DHL API key"),
   },
   async (params: { trackingNumber: string; apiKey: string }) => {
-    const response = await fetch(`https://api-eu.dhl.com/track/shipments/${params.trackingNumber}`, {
+    const response = await fetch(`https://api-eu.dhl.com/track/shipments?trackingNumber=${params.trackingNumber}`, {
       headers: {
         "DHL-API-Key": params.apiKey,
         "Accept": "application/json",
