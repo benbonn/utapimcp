@@ -27,7 +27,8 @@
   "devDependencies": {
     "@types/express": "^5.0.1",
     "@types/node": "^22.15.17",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "shx": "^0.3.4"
   },
    "modelcontext": {
     "instructions": "src/instructions.md",
