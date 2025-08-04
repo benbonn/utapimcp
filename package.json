@@ -15,7 +15,7 @@
   "bin": {
     "demo": "./dist/server.js"
   },
-  "keywords": [ ],
+  "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
@@ -30,10 +30,11 @@
     "typescript": "^5.8.3",
     "shx": "^0.3.4"
   },
-   "modelcontext": {
+  "modelcontext": {
     "instructions": "src/instructions.md",
     "description": "A streamable HTTP MCP server with AI-readable context instructions",
     "goal": "Handle UTAPI MCP requests and forward OBIS data to an HTTP endpoint",
     "entry_point": "src/server.js"
-  }
+  },
+  "_buildCacheHint": "v2"
 }
