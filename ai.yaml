@@ -1,4 +1,4 @@
 name: utapimcp
 description: MCP server for UTAPI
 entry_point: src/server.js
-instructions: src/instructions.md
+instructions: instructions.md
