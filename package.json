@@ -5,7 +5,7 @@
   "main": "src/server.js",
   "type": "module",
   "scripts": {
-    "build": "tsc && shx cp src/instructions.md dist/",
+    "build": "tsc && shx cp src/instructions.md dist/ && shx cp src/instructions.md ./"
     "start": "node dist/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
