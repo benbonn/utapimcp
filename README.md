@@ -1,5 +1,7 @@
 # Microsoft Copilot Studio ❤️ MCP
 
+[![smithery badge](https://smithery.ai/badge/@benbonn/utapimcp)](https://smithery.ai/server/@benbonn/utapimcp)
+
 Welcome to the **Microsoft Copilot Studio ❤️ MCP** lab. In this lab, you will learn how to deploy an MCP Server, and how to add it to Microsoft Copilot Studio.
 
 ## ❓ What is MCP?
