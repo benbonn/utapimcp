@@ -14,7 +14,8 @@ It is based on the official **Microsoft MCP Streamable HTTP Template**, but the 
 The server exposes one MCP Tool: **track-shipment**
 
 ### 🔧 `track-shipment`
-Tracks a DHL shipment using the official DHL REST API.
+Tracks a DHL shipment using the official DHL Shipment Tracking - Unified API.
+https://developer.dhl.com/api-reference/shipment-tracking
 
 **Parameters:**
 
